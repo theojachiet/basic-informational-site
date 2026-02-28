@@ -2,53 +2,35 @@ const http = require('http');
 const fs = require('fs');
 
 const server = http.createServer(function (req, res) {
-    //console.log(req.url)
 
-    if (req.url == '/') {
-        res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Content-Type', 'text/html');
 
-        fs.readFile('./index.html', (err, data) => {
-            if (err) {
-                console.log(err)
-            } else {
-                res.write(data);
-                res.end();
-            }
-        })
-    } else if (req.url == '/about') {
-        res.setHeader('Content-Type', 'text/html');
+    let path = './';
 
-        fs.readFile('./about.html', (err, data) => {
-            if (err) {
-                console.log(err)
-            } else {
-                res.write(data);
-                res.end();
-            }
-        })
-    } else if (req.url == '/contact-me') {
-        res.setHeader('Content-Type', 'text/html');
-
-        fs.readFile('./contact-me.html', (err, data) => {
-            if (err) {
-                console.log(err)
-            } else {
-                res.write(data);
-                res.end();
-            }
-        })
-    } else {
-        res.setHeader('Content-Type', 'text/html');
-
-        fs.readFile('./404.html', (err, data) => {
-            if (err) {
-                console.log(err)
-            } else {
-                res.write(data);
-                res.end();
-            }
-        })
+    switch (req.url) {
+        case '/':
+            path += 'index.html'
+            break;
+        case '/about':
+            path += 'about.html'
+            break;
+        case '/contact-me':
+            path += 'contact-me.html'
+            break;
+        default:
+            path += '404.html'
+            break;
     }
+
+    fs.readFile(path, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.end()
+        } else {
+            res.end(data);
+        }
+    })
+
 });
 
 server.listen(3000, 'localhost', () => {
