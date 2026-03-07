@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+const path = require('node:path');
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 const authorRouter = require('./routes/authorRouter');
 const bookRouter = require('./routes/bookRouter');
@@ -8,8 +12,6 @@ const indexRouter = require('./routes/indexRouter');
 app.use('/authors', authorRouter);
 app.use('/books', bookRouter);
 app.use('/', indexRouter);
-
-
 
 app.listen(3000, (error) => {
     if (error) throw error;
