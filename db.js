@@ -14,7 +14,7 @@ async function getAuthorById(authorId) {
     return authors.find(author => author.id === authorId);
 };
 
-async function getBookById(BookId) {
+async function getBookById(bookId) {
     return books.find(book => book.id === bookId);
 };
 
