@@ -6,14 +6,17 @@ const indexRouter = Router();
 const links = [
     { href: "/", text: "Home" },
     { href: "about", text: "About" },
+    { href: "contact", text: "Contact" },
 ];
 
+const users = ["Rose", "Cake", "Biff"];
+
 indexRouter.get('/', (req, res) => {
-    res.render('index', { links: links })
+    res.render('index', { links: links, users: users })
 })
 
 indexRouter.get('/about', (req, res) => {
-    res.sendFile(path.resolve('about.html'));
+    res.render('about');
 })
 
 indexRouter.get('/contact', (req, res) => {
